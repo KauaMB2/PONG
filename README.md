@@ -1,6 +1,6 @@
 # PONG 
 
-> "PONG" é um jogo feito com HTML CSS e JavaScript, no intuito de treinar comandos do JavaScript que alteram a posição e a estrutura de elementos no HTML.
+> "PONG" é um jogo feito com HTML, CSS e JavaScript no intuito de treinar comandos do JavaScript que alteram a posição e a estrutura de elementos no HTML.
 O Jogo consiste em uma bola que se movimenta dentro de campo e duas barras que servem como defesa. Se a bola encostar em uma das barras pretas, o sentido no eixo X é invertido e um calculo é feito para definir o novo sentido no eixo Y. É você contra a máquina.
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/KauaMB2/PONG?style=for-the-badge)
