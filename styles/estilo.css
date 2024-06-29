@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    background: linear-gradient(to left, #4CAF50, #2196F3); /* Example gradient colors */
+}
+
+#dvPainel {
+	margin-left: 50px;
+	margin-top: 10px;
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+
+#dvJogo {
+    margin: auto;
+    margin-top: 20px;
+    width: 960px;
+    height: 500px;
+    border: 1px solid #000;
+    position: relative;
+    background: linear-gradient(to bottom, #4CAF50, #2196F3); /* Example gradient colors */
+}
+
+#dvBola {
+    border-radius: 50%;
+    position: absolute;
+    top: 240px;
+    left: 475px;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}
+
+.barra {
+    position: absolute;
+    width: 20px;
+    height: 140px;
+    border: 5px solid #000;
+}
+
+.esquerda {
+    left: 10px;
+    top: 180px; /* Adjusted position relative to #dvJogo */
+}
+
+.direita {
+    right: 10px; /* Adjusted position relative to #dvJogo */
+    top: 180px; /* Adjusted position relative to #dvJogo */
+}
+#btIniciar{
+	width: 160px;
+	height: 50px;
+	background-color: #A020F0;
+	color: #fff;           /* Set text color to white */
+	font-size: 38px;       /* Increase font size */
+	font-weight: bold;     /* Make the text bold */
+	border: none;          /* Remove default border */
+	border-radius: 5px;    /* Add rounded corners for better appearance */
+	cursor: pointer;       /* Change cursor to pointer when hovering over the button */
+	text-align: center;    /* Center the text */
+	display: flex;         /* Use flexbox to center text vertically and horizontally */
+	justify-content: center;
+	align-items: center;
+}
+#dvPainel {
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+
+.itemPainel {
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.nomeJogador {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+#txtPontos{
+	font-weight: bold;
+    font-size: 18px;
+}
+#txtPontosJogador, #txtPontosCPU {
+	font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+
+}

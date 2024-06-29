@@ -3,7 +3,8 @@ var vbtIniciar;
 var vbola;
 var vcpu;
 var vjogador;
-var vPaineltxtPontos;
+var vPaineltxtPontosJogador;
+var vPaineltxtPontosCPU;
 //Controle de animação
 var game,frames;
 //Posições
@@ -24,15 +25,20 @@ var cpuY=0;
 var velBola,velCpu,velJogador;
 //Controle
 var pontos=0;
+var pontosJogador=0;
+var pontosCPU=0;
 var tecla;
 jogo=false;
+//Sons
+var pontoDaCpu = new Audio('./songs/pontoDaCpu.mp3');
+var pontoDoJogador = new Audio('./songs/pontoDoJogador.mp3');
 function controlajog(){
 	if(jogo){
 		posJogadorY+=velJogador*dirJy;
 		if(posJogadorY<=0){
 			posJogadorY=0;
-		}else if(posJogadorY>=360){
-			posJogadorY=360;
+		}else if(posJogadorY>=350){
+			posJogadorY=350;
 		}
 		vjogador.style.top=posJogadorY+"px";
 	}
@@ -52,6 +58,11 @@ function controlacpu(){
 					posCpuY-=velCpu;
 				}
 			}
+			if(posCpuY<0){
+				posCpuY=0;
+			}else if(posCpuY>350){
+				posCpuY=350;
+			}
 		}else{
 			//Posicionar CPU no centro
 			if((posCpuY+(barraH/2)) < (campoH/2)){
@@ -69,16 +80,16 @@ function controlaBola(){
 	posBolaY+=velBola*bolaY;
 	//Colisão com jogador
 	if(
-		(posBolaX <= posJogadorX+barraW)&&
-		((posBolaY+bolaH >= posJogadorY)&&(posBolaY <=posJogadorY+barraH))
+		(posBolaX <= posJogadorX+barraW+12)&&
+		((posBolaY+bolaH+10 >= posJogadorY)&&(posBolaY <=posJogadorY+barraH+10))
 	){
 		bolaY=(((posBolaY+(bolaH/2))-(posJogadorY+(barraH/2)))/32);
 		bolaX*=-1;
 	}
 	//Colisão com CPU
 	if(
-		(posBolaX >= posCpuX-barraW)&&
-		((posBolaY+bolaH >= posCpuY)&&(posBolaY <=posCpuY+barraH))
+		(posBolaX >= posCpuX-barraW-12)&&
+		((posBolaY+bolaH+10 >= posCpuY)&&(posBolaY <=posCpuY+barraH+10))
 	){
 		bolaY=(((posBolaY+(bolaH/2))-(posCpuY+(barraH/2)))/32);
 		bolaX*=-1;
@@ -94,22 +105,24 @@ function controlaBola(){
 		posBolaY=posBolaIniY;
 		posJogadorY=posJogIniY;
 		posCpuY=posCpuIniY;
-		pontos++;
-		vPaineltxtPontos.value=pontos;
+		pontosJogador++;
+		vPaineltxtPontosJogador.innerHTML=pontosJogador;
 		jogo=false;
 		vjogador.style.top=posJogadorY+"px";
 		vcpu.style.top=posCpuY+"px";
+		pontoDoJogador.play();
 	}else if(posBolaX <= 0){
 		velBola=0;
 		posBolaX=posBolaIniX;
 		posBolaY=posBolaIniY;
 		posJogadorY=posJogIniY;
 		posCpuY=posCpuIniY;
-		pontos--;
-		vPaineltxtPontos.value=pontos;
+		pontosCPU++;
+		vPaineltxtPontosCPU.innerHTML=pontosCPU;
 		jogo=false;
 		vjogador.style.top=posJogadorY+"px";
-		vcpu.style.top=posCpuY+"px";					
+		vcpu.style.top=posCpuY+"px";
+		pontoDaCpu.play();					
 	}
 	vbola.style.top=posBolaY+"px";
 	vbola.style.left=posBolaX+"px";
@@ -168,8 +181,28 @@ function inicializa(){
 	vjogador=document.getElementById("dvJogador");
 	vcpu=document.getElementById("dvCpu");
 	vbola=document.getElementById("dvBola");
-	vPaineltxtPontos=document.getElementById("txtPontos");
+	vPaineltxtPontosJogador=document.getElementById("txtPontosJogador");
+	vPaineltxtPontosCPU=document.getElementById("txtPontosCPU");
 	document.addEventListener("keydown",teclaDw);
 	document.addEventListener("keyup",teclaUp);
 }
 window.addEventListener("load",inicializa);
+
+function isMobileOrTablet() {
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+document.addEventListener("DOMContentLoaded", ()=>{
+    if (isMobileOrTablet()) {//If the game is beeing runned in a mobile device
+		var telaMsg = document.getElementById("dvJogo");
+        telaMsg.style.backgroundImage="url('./imgs/erro.png')";// Show the warning image inside the telaMsg div
+        telaMsg.style.display = 'flex'; // Use 'flex' if you want to center the content as per the CSS
+		var dvPainel=document.getElementById("dvPainel")
+		dvPainel.style.display="none"
+		var dvBola=document.getElementById("dvBola")
+		dvBola.style.display="none"
+		var dvJogador=document.getElementById("dvJogador")
+		dvJogador.style.display="none"
+		var dvCpu=document.getElementById("dvCpu")
+		dvCpu.style.display="none"
+    }
+})
