@@ -32,6 +32,7 @@ jogo=false;
 //Sons
 var pontoDaCpu = new Audio('./songs/pontoDaCpu.mp3');
 var pontoDoJogador = new Audio('./songs/pontoDoJogador.mp3');
+var colisaoDaBola = new Audio('./songs/colisaoDaBola.wav');
 function controlajog(){
 	if(jogo){
 		posJogadorY+=velJogador*dirJy;
@@ -85,6 +86,7 @@ function controlaBola(){
 	){
 		bolaY=(((posBolaY+(bolaH/2))-(posJogadorY+(barraH/2)))/32);
 		bolaX*=-1;
+		colisaoDaBola.play();
 	}
 	//Colisão com CPU
 	if(
@@ -93,6 +95,7 @@ function controlaBola(){
 	){
 		bolaY=(((posBolaY+(bolaH/2))-(posCpuY+(barraH/2)))/32);
 		bolaX*=-1;
+		colisaoDaBola.play();
 	}
 	//Limites superior e inferior
 	if((posBolaY >= 480)||(posBolaY <= 0)){
